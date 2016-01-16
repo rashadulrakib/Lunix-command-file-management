@@ -1,0 +1,84 @@
+inode:
+df -i
+
+#!/bin/bash
+
+OUT_DIR="4gms_prefix"
+
+# Make the output sub-directory
+mkdir $OUT_DIR
+cd $OUT_DIR
+
+# Re-order each line of all the 4-gm files and concatenate them into '4gms'
+cat ../4gm-0??? | awk '{ print $3 " " $4 " " $1 " " $2 "\t" $5 }'  > 4gms
+
+# Sort the concatenated file
+LANG=C sort 4gms -T . -o 4gms
+
+# Split the result into 10M-line files, like the original 4gm files
+split -d -a4 -l 10000000 4gms 4gm-
+
+
+OUT_DIR="213"
+mkdir $OUT_DIR
+cd $OUT_DIR
+
+cat ../3gm-0??? | awk '{ print $2 " " $1 " " $3 "\t" $4 }'  > 3gms
+LANG=C sort 3gms -T . -o 3gms
+split -d -a4 -l 10000000 3gms 3gm-213-
+
+
+OUT_DIR="312"
+mkdir $OUT_DIR
+cd $OUT_DIR
+
+cat ../3gm-0??? | awk '{ print $3 " " $1 " " $2 "\t" $4 }'  > 3gms
+LANG=C sort 3gms -T . -o 3gms
+split -d -a4 -l 10000000 3gms 3gm-312-
+
+
+OUT_DIR="2314"
+mkdir $OUT_DIR
+cd $OUT_DIR
+
+cat ../4gm-0??? | awk '{ print $2 " " $3 " " $1 " " $4 "\t" $5 }'  > 4gms
+LANG=C sort 4gms -T . -o 4gms
+split -d -a4 -l 10000000 4gms 4gm-2314-
+
+
+OUT_DIR="3412"
+mkdir $OUT_DIR
+cd $OUT_DIR
+
+cat ../4gm-0??? | awk '{ print $3 " " $4 " " $1 " " $2 "\t" $5 }'  > 4gms
+LANG=C sort 4gms -T . -o 4gms
+split -d -a4 -l 10000000 4gms 4gm-3412-
+
+############################
+OUT_DIR="23145"
+mkdir $OUT_DIR
+cd $OUT_DIR
+
+cat ../5gm-0??? | awk '{ print $2 " " $3 " " $1 " " $4 " " $5 "\t" $6 }'  > 5gms
+LANG=C sort 5gms -T . -o 5gms
+split -d -a4 -l 10000000 5gms 5gm-23145-
+
+
+OUT_DIR="34125"
+mkdir $OUT_DIR
+cd $OUT_DIR
+
+cat ../5gm-0??? | awk '{ print $3 " " $4 " " $1 " " $2 " " $5 "\t" $6 }'  > 5gms
+LANG=C sort 5gms -T . -o 5gms
+split -d -a4 -l 10000000 5gms 5gm-34125-
+
+
+OUT_DIR="45123"
+mkdir $OUT_DIR
+cd $OUT_DIR
+
+cat ../5gm-0??? | awk '{ print $4 " " $5 " " $1 " " $2 " " $3 "\t" $6 }'  > 5gms
+LANG=C sort 5gms -T . -o 5gms
+split -d -a4 -l 10000000 5gms 5gm-45123-
+
+
